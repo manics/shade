@@ -3944,7 +3944,7 @@ class OpenStackCloud(_normalize.Normalizer):
 
             filters = {
                 'port_id': None,
-                'floating_network_id': floating_network_id,
+                'network': floating_network_id,
                 'tenant_id': project_id
             }
 
