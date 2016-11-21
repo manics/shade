@@ -2014,9 +2014,9 @@ class OpenStackCloud(_normalize.Normalizer):
         :returns: A list of network ``munch.Munch`` if one is found
         """
         self._find_interesting_networks()
-        return list(
-            set(self._external_ipv4_networks) |
-            set(self._external_ipv6_networks))
+        networks =  {net['id']: net for net in (
+            self._external_ipv4_networks + self._external_ipv6_networks)}
+        return list(networks.values())
 
     def get_internal_networks(self):
         """Return the networks that are configured to not route northbound.
@@ -2027,9 +2027,9 @@ class OpenStackCloud(_normalize.Normalizer):
         :returns: A list of network ``munch.Munch`` if one is found
         """
         self._find_interesting_networks()
-        return list(
-            set(self._internal_ipv4_networks) |
-            set(self._internal_ipv6_networks))
+        networks =  {net['id']: net for net in (
+            self._internal_ipv4_networks + self._internal_ipv6_networks)}
+        return list(networks.values())
 
     def get_external_ipv4_networks(self):
         """Return the networks that are configured to route northbound.
